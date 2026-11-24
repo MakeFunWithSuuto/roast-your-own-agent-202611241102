@@ -8,6 +8,8 @@ const repo = resolve(import.meta.dirname, '..');
 const out = join(repo, 'out');
 execFileSync('node', [join(repo, 'main.ts')], { env: { ...process.env, MAKEFUN_OUTPUT_DIR: out } });
 const entry = readFileSync(join(out, 'entry.txt'), 'utf8');
+const length = [...entry].length;
+if (length < 1 || length > 200 || !entry.trim()) throw new Error(`entry fails the gate: ${length} characters`);
 
 const escapeHtml = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const html = `<!doctype html><meta charset="utf-8"><body style="margin:0;width:1200px;height:630px;display:flex;
@@ -20,5 +22,5 @@ const chrome = join(homedir(), '.cache/ms-playwright/chromium_headless_shell-125
 execFileSync(chrome, ['--no-sandbox', '--hide-scrollbars', '--window-size=1200,630',
   `--screenshot=${join(repo, 'screenshots/entry.png')}`, `file://${join(out, 'entry.html')}`], { stdio: 'ignore' });
 
-writeFileSync(join(repo, 'dossier.json'), JSON.stringify({ entry, characters: [...entry].length }, null, 1) + '\n');
-console.log(`${[...entry].length} chars: ${entry}`);
+writeFileSync(join(repo, 'dossier.json'), JSON.stringify({ entry, characters: length }, null, 1) + '\n');
+console.log(`${length} chars: ${entry}`);
