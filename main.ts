@@ -4,7 +4,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 export const ROAST =
-  "My agent saves a lesson to memory after every task. It now has 312 files, all named 'be more concise.'";
+  "My agent keeps 312 memory notes reminding itself to be concise. Each one is four paragraphs.";
 
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 mkdirSync(outDir, { recursive: true });
