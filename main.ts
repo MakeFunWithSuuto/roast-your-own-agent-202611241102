@@ -4,7 +4,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 export const ROAST =
-  "My agent spent four hours on one line: a design doc, three reviewer subagents, a TLA+ model. It shipped 'Hello, World.'";
+  "My agent saves a lesson to memory after every task. It now has 312 files, all named 'be more concise.'";
 
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 mkdirSync(outDir, { recursive: true });
